@@ -14,7 +14,7 @@ public class PersonController {
     public PersonController(PersonService service){
         this.service = service;
     }
-    @GetMapping("/Person/{id}")
+    @GetMapping("/people/{id}")
     public ResponseEntity<Person> getPerson(@PathVariable("id") int id){
         return new ResponseEntity<>(service.getPerson(id),HttpStatus.OK);
     }
@@ -23,18 +23,18 @@ public class PersonController {
         return new ResponseEntity<>(service.listPerson(),HttpStatus.OK);
     }
 
-    @PostMapping("/Person/")
+    @PostMapping("/people/")
     public ResponseEntity<Person> createPerson(@RequestBody Person p){
 
         return new ResponseEntity<>(service.createPerson(p), HttpStatus.CREATED);
     }
 
-    @PutMapping("/Person/")
+    @PutMapping("/people/")
     public ResponseEntity<Person> update(@RequestBody int id, Person person){
         return new ResponseEntity<>(service.updatePerson(id,person),HttpStatus.OK);
     }
 
-    @DeleteMapping("/Person/")
+    @DeleteMapping("/people/")
     public ResponseEntity<Boolean> destroy(@PathVariable("id") int id){
         return  new ResponseEntity<>(service.deletePerson(id),HttpStatus.OK);
     }
