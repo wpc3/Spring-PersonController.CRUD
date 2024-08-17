@@ -11,10 +11,17 @@ public class PersonController {
 
     private PersonService service;
 
-//    public PersonController(PersonController service){
-//        this.service = service;
-//    }
+    public PersonController(PersonService service){
+        this.service = service;
+    }
+    @GetMapping("/Person/{id}")
+    public ResponseEntity<Person> getPerson(@PathVariable("id") int id){
+        return new ResponseEntity<>(service.getPerson(id),HttpStatus.OK);
+    }
 
+    public ResponseEntity<Iterable<Person>> listPersons(){
+        return new ResponseEntity<>(service.listPerson(),HttpStatus.OK);
+    }
 
     @PostMapping("/Person/")
     public ResponseEntity<Person> createPerson(@RequestBody Person p){
@@ -28,7 +35,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/Person/")
-    public ResponseEntity<Boolean> destroy(int id){
+    public ResponseEntity<Boolean> destroy(@PathVariable("id") int id){
         return  new ResponseEntity<>(service.deletePerson(id),HttpStatus.OK);
     }
 
